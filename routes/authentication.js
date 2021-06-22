@@ -64,7 +64,6 @@ route.post("/signin", async (req, res) => {
     res.status(401).json({ message: "Invalid Password." });
     return;
   }
-
   try {
     res.status(200).json({
       token: jwt.sign(
@@ -73,7 +72,7 @@ route.post("/signin", async (req, res) => {
           role: find.role,
           username: find.username,
         },
-        find.uuid
+        
       ),
     });
     return;

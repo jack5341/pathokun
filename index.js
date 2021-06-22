@@ -8,14 +8,14 @@ dotenv.config();
 
 // Routes
 import AUTH from "./routes/authentication"
-// import AUTH from "./routes/authentication"
+import SERVICES from "./routes/services"
 
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/a", AUTH)
-// app.use("/s", AUTH)
+app.use("/s", SERVICES)
 
 mongoose.connect(process.env.DB_STRING, { useNewUrlParser: true,useCreateIndex: true, useUnifiedTopology: true }, (err) => {
   if (err) console.log("COULDNT CONNECT TO DB");
