@@ -1,13 +1,12 @@
+
 import jwt from "jsonwebtoken";
 
-export const AuthorizeToken = (req, res, next) => {
+export const AuthorizePanel = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {
     const token = authHeader.split(" ")[1];
-    const secret_token = process.env.AUTH_SECRET_TOKEN
-    jwt.verify(token, secret_token, (err, user) => {
-      if (err) console.log(err);
-      console.log(user);
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+      if (err) res.sendStatus(403)
       req.user = user;
       next();
     });
