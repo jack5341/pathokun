@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Project A",
-    "dateExported": "2021-06-16T19:42:44.109Z",
+    "dateExported": "2021-06-23T17:14:40.841Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -22,7 +22,7 @@
             "name": "Login",
             "url": "http://localhost:4000/a/signin",
             "method": "POST",
-            "modified": "2021-06-16T19:20:31.069Z",
+            "modified": "2021-06-23T16:32:51.306Z",
             "created": "2021-06-16T19:17:03.418Z",
             "_id": "616fcbb6-633d-4c0f-9629-9c655bb0d632",
             "body": {
@@ -31,11 +31,11 @@
                 "form": [
                     {
                         "name": "Username",
-                        "value": "jack5341"
+                        "value": "admin"
                     },
                     {
                         "name": "Password",
-                        "value": "dwqwdwqd"
+                        "value": "admin"
                     }
                 ]
             },
@@ -58,7 +58,7 @@
             "name": "Register",
             "url": "http://localhost:4000/a/signup",
             "method": "POST",
-            "modified": "2021-06-16T19:21:27.611Z",
+            "modified": "2021-06-23T15:27:35.092Z",
             "created": "2021-06-16T19:17:14.220Z",
             "_id": "3525b2e4-5298-4d5a-a93f-ef6bebcfc765",
             "body": {
@@ -67,11 +67,15 @@
                 "form": [
                     {
                         "name": "Username",
-                        "value": "jack5341s"
+                        "value": "admin"
                     },
                     {
                         "name": "Password",
-                        "value": "helloworld123"
+                        "value": "admin"
+                    },
+                    {
+                        "name": "Email",
+                        "value": "gometi7824@beydent.com"
                     }
                 ]
             },
@@ -91,14 +95,14 @@
                 },
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphY2s1MzQxIiwicm9sZSI6Imd1ZXN0IiwiaWF0IjoxNjIzODY5NDAyLCJleHAiOjE2MjM4NzA2MDJ9.QqoeMZA6AUQ9hJOSDCLa3fEKBGRKPZVgAIc4am5HuO4"
+                    "value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOWNiNTRhNzAtZDVhYy00Njc3LWI0NGUtYmFlZjM1ZWFmY2ViIiwicm9sZSI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjI0NDY1OTcxLCJleHAiOjE2MjQ0Njk1NzF9.8tIvuDjDeYtJj9mHj7YTRm8nfPGRwnsPu0PyFGlYdZw"
                 }
             ],
             "colId": "6d5f8785-0188-4937-829c-715b814c1094",
             "name": "Create Breakpoint",
-            "url": "localhost:4000/s/jack5341/panel/breakpoint",
+            "url": "localhost:4000/s/endpoint",
             "method": "POST",
-            "modified": "2021-06-16T19:24:49.551Z",
+            "modified": "2021-06-23T17:14:15.740Z",
             "created": "2021-06-16T19:17:23.473Z",
             "_id": "879e9b54-fdb3-49cd-b54e-37af3d56cd6a",
             "body": {
@@ -106,8 +110,12 @@
                 "raw": "",
                 "form": [
                     {
-                        "name": "point_name",
+                        "name": "Endpoint",
                         "value": "invoiceprinter"
+                    },
+                    {
+                        "name": "Content",
+                        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.YPMI1KadTjVvsM-IqPz1Vg2Ep2uV5qyQzDt23YnWRSM"
                     }
                 ]
             },
@@ -115,7 +123,7 @@
         },
         {
             "containerId": "",
-            "sortNum": 40000,
+            "sortNum": 70000,
             "headers": [
                 {
                     "name": "Accept",
@@ -124,24 +132,30 @@
                 {
                     "name": "User-Agent",
                     "value": "Thunder Client (https://www.thunderclient.io)"
-                },
-                {
-                    "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphY2s1MzQxIiwicm9sZSI6Imd1ZXN0IiwiaWF0IjoxNjIzODcxMjMxLCJleHAiOjE2MjM4NzI0MzF9.Z6NOTfZ2g104dr4g4D0tmUHD10deo4fUZ29lqxcY6iM"
                 }
             ],
             "colId": "6d5f8785-0188-4937-829c-715b814c1094",
-            "name": "Get All Points",
-            "url": "localhost:4000/s/jack5341/panel/allbreakpoints",
-            "method": "GET",
-            "modified": "2021-06-16T19:31:57.882Z",
-            "created": "2021-06-16T19:17:35.134Z",
-            "_id": "20cc89cf-275b-4cfa-8a71-5bba283bfbf2",
+            "name": "Reset Password",
+            "url": "http://localhost:4000/a/reset-password/jack5341/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImE4MDgyZjg2ODRhZDk1NjU5YjkyMDJhMGEzN2QwNzhmNGVlNzNiNzNjOTdlODBkZjJlNDk3ZjRiNGE3YjgzYzNiMDkyZWViZjg4OTA4ZGZiOTFkYjU1YzQ0MTQ0YjdiMSIsImlhdCI6MTYyNDQ2MDQ1MSwiZXhwIjoxNjI0NDYxMDUxfQ.T_mdy6Fi5Xs3z0oltLAmEnfM8MB5Yq0ense7C1Sc8MY",
+            "method": "PUT",
+            "modified": "2021-06-23T15:01:14.132Z",
+            "created": "2021-06-23T12:02:51.248Z",
+            "_id": "f81db387-8e2c-42c4-aefb-003bdbdcab9d",
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "NewPassword",
+                        "value": "123123213"
+                    }
+                ]
+            },
             "tests": []
         },
         {
             "containerId": "",
-            "sortNum": 50000,
+            "sortNum": 80000,
             "headers": [
                 {
                     "name": "Accept",
@@ -150,45 +164,29 @@
                 {
                     "name": "User-Agent",
                     "value": "Thunder Client (https://www.thunderclient.io)"
-                },
-                {
-                    "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiJ9.JDJiJDEyJGFydlo1b01PU3pvZHd1RDlzUU85aGVENnphWW5hY1dJY1l1R1hscW5VM05Na1U5bEpWbVcy.xuPMRShoQC32HLs2bjbbb4i_qoO4InrCou2kwammzbc"
                 }
             ],
             "colId": "6d5f8785-0188-4937-829c-715b814c1094",
-            "name": "Get Example Point",
-            "url": "localhost:4000/s/jack5341/invoiceprinter",
-            "method": "GET",
-            "modified": "2021-06-16T19:38:39.842Z",
-            "created": "2021-06-16T19:17:58.690Z",
-            "_id": "d9bb3072-64fa-41da-989e-bd7419ff0d5c",
-            "tests": []
-        },
-        {
-            "containerId": "",
-            "sortNum": 60000,
-            "headers": [
-                {
-                    "name": "Accept",
-                    "value": "*/*"
-                },
-                {
-                    "name": "User-Agent",
-                    "value": "Thunder Client (https://www.thunderclient.io)"
-                },
-                {
-                    "name": "Authorization",
-                    "value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphY2s1MzQxIiwicm9sZSI6Imd1ZXN0IiwiaWF0IjoxNjIzODcxMjMxLCJleHAiOjE2MjM4NzI0MzF9.Z6NOTfZ2g104dr4g4D0tmUHD10deo4fUZ29lqxcY6iM"
-                }
-            ],
-            "colId": "6d5f8785-0188-4937-829c-715b814c1094",
-            "name": "Get Access Token",
-            "url": "localhost:4000/s/jack5341/panel/accesstoken",
-            "method": "GET",
-            "modified": "2021-06-16T19:39:58.781Z",
-            "created": "2021-06-16T19:18:12.948Z",
-            "_id": "4bceadad-db9f-4f9f-aefa-0bad57bc5e6a",
+            "name": "Get Reset Link",
+            "url": "http://localhost:4000/a/password-forgot",
+            "method": "POST",
+            "modified": "2021-06-23T15:00:51.684Z",
+            "created": "2021-06-23T14:30:14.278Z",
+            "_id": "16fcf815-74c3-4d08-abef-b7b3f4d3e53a",
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "Email",
+                        "value": "nedim.akar53411@gmail.com"
+                    },
+                    {
+                        "name": "Username",
+                        "value": "jack5341"
+                    }
+                ]
+            },
             "tests": []
         }
     ]

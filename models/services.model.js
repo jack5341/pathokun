@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const newPath = new Schema({
+const newPoint = new Schema({
   uuid: {
     type: String,
     required: true,
   },
-  pathnames: {
-    type: Object,
+  endpoint: {
+    type: Array,
     required: true,
   },
   date: {
@@ -16,4 +16,4 @@ const newPath = new Schema({
   },
 });
 
-export const newPathSchema = mongoose.model("pathnames", newPath);
+export const endPointSchema = mongoose.model("endpoints", newPoint);
