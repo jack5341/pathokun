@@ -3,10 +3,10 @@ import jwt from "jsonwebtoken";
 const route = Router();
 
 // Models
-import { newPathSchema } from "../models/services.model";
+import { newPathSchema } from "@models/services.model";
 
 // Plugins
-import { AuthorizePanel } from "../plugins/authorize";
+import { AuthorizePanel } from "@plugins/authorize";
 
 route.post("/pathname", AuthorizePanel, async (req, res) => {
   const { role, username, uuid } = req.user;

@@ -6,6 +6,10 @@ const Signup = new Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+  },
   username: {
     type: String,
     required: true,
@@ -13,6 +17,10 @@ const Signup = new Schema({
   password: {
     type: String,
     required: true,
+  },
+  reset_token: {
+    type: String,
+    require: true
   },
   role: {
     type: String,
@@ -22,4 +30,4 @@ const Signup = new Schema({
   date: { type: Date, default: Date.now },
 });
 
-export const SignupSchema = mongoose.model("authentications", Signup);
+export const SignupSchema = mongoose.model("users", Signup);
