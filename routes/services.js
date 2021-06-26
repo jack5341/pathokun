@@ -1,5 +1,5 @@
 import { Router } from "express";
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 const route = Router();
 
 // Models
@@ -21,21 +21,34 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
     return;
   }
 
-  // const find = await endPointSchema.findOne({ uuid: uuid });
-  // if (find.endpoint) {
-  //   find.endpoint = [...find.endpoint, { point: Endpoint, Content: Content }];
-  //   find.save();
-  //   res.status(200).json({ message: "Created and Imported data to new Endpoint succesfully!" });
-  //   return
-  // } else {
-  const data = new endPointSchema({
-    uuid: uuid,
-    endpoint: [{ point: Endpoint, Content }],
-    date: Date.now(),
-  });
-  data.save();
-  res.status(200).json({ message: "Created new Endpoint succesfully!" });
-  return;
+  try {
+    const find = await endPointSchema.findOne({ uuid: uuid });
+    if (!find) {
+      const data = new endPointSchema({
+        uuid: uuid,
+        endpoint: [{ point: Endpoint, Content }],
+        date: Date.now(),
+      });
+      await data.save();
+      console.log(1);
+      res.status(200).json({ message: "Succesfully Created new Breakpoint" });
+      return;
+    } else {
+      if (!find.endpoint) {
+        console.log(2);
+        res.end();
+        return;
+      } else {
+        console.log(3);
+        res.end();
+        return;
+      }
+    }
+  } catch (e) {
+    console.log(e);
+    res.end();
+    return;
+  }
 });
 
 export default route;

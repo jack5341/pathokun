@@ -6,10 +6,17 @@ export const AuthorizePanel = (req, res, next) => {
   if (authHeader) {
     const token = authHeader.split(" ")[1];
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-      if (err) res.sendStatus(403)
+      if (err) {
+        res.sendStatus(403)
+        return
+      }
       req.user = user;
       next();
     });
   }
   next();
 };
+
+export const AuthorizePrivate = (req,res,next) => {
+  
+}
