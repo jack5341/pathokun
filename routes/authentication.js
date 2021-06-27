@@ -58,7 +58,7 @@ route.post("/signin", async (req, res) => {
   const { error } = schema.validate(req.body);
   if (error) {
     res.status(400).json({ message: error });
-    return
+    return;
   }
 
   const comparePass = bcrypt.compareSync(Password, find.password);

@@ -4,7 +4,7 @@ const route = Router();
 // Plugins 
 import { AuthorizePrivate } from "@plugins/authorize"
 
-route.get(":user/:endpoint", AuthorizePrivate, (req,res) => {
+route.get("/:usr/:point", AuthorizePrivate, (req,res) => {
     res.send(true)
 })
 

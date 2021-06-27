@@ -36,11 +36,9 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
       if (!find.endpoint) {
         console.log(2);
         res.end();
-        return;
       } else {
         console.log(3);
         res.end();
-        return;
       }
     }
   } catch (e) {
