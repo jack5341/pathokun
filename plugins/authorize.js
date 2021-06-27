@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 
 // Schemas
 import { SignupSchema } from "@models/auth.model";
+import { endPointSchema } from "@models/services.model";
 
 export const AuthorizePanel = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -22,20 +23,20 @@ export const AuthorizePanel = (req, res, next) => {
 
 export const AuthorizePrivate = async (req, res, next) => {
   const header = req.headers.authorization;
-  const { user, endpoint } = req.params;
+  const { usr } = req.params;
 
-  const find = await SignupSchema.findOne({ username: user });
+  const find = await SignupSchema.findOne({ username: usr });
 
   if (!find) {
     res.status(403).json({ message: "Invalid user" });
     return;
   }
 
-  const findEndpoint = console.log(find.filter(x => x.endpoint === endpoint))
-  // if(!endpoint){
-  //   res.status(403).json({ message: "Invalid Endpoint" })
-  //   return
-  // }
+  const data = await endPointSchema.findOne({ uuid: find.uuid });
+  if(!data){
+    res.status(403).json({ message: "Invalid Endpoint" })
+    return
+  }
 
   if (header) {
     const token = header.split(" ")[1];
