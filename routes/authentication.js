@@ -29,7 +29,6 @@ route.post("/signup", async (req, res) => {
 
   try {
     const user = new SignupSchema({
-      uuid: crypto.randomUUID(),
       reset_token: crypto.randomBytes(48).toString("hex"),
       email: Email,
       username: Username,
@@ -71,7 +70,6 @@ route.post("/signin", async (req, res) => {
     res.status(200).json({
       token: jwt.sign(
         {
-          uuid: find.uuid,
           role: find.role,
           username: find.username,
         },

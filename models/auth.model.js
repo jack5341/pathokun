@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const Signup = new Schema({
-  uuid: {
-    type: String,
-    required: true,
-  },
   email: {
     type: String,
     required: true,
