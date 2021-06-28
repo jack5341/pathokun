@@ -16,9 +16,10 @@ export const AuthorizePanel = (req, res, next) => {
       req.user = user;
       next();
     });
+  }else {
+    res.sendStatus(403);
+    return;
   }
-  res.sendStatus(403);
-  return;
 };
 
 export const AuthorizePrivate = async (req, res, next) => {

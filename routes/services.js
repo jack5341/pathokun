@@ -29,21 +29,19 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
         date: Date.now(),
       });
       await data.save();
-      console.log(1);
       res.status(200).json({ message: "Succesfully Created new Breakpoint" });
       return;
     } else {
-      if (!find.endpoint) {
-        console.log(2);
-        res.end();
+      if (find.endpoint) {
+        find.endpoint = [{ point: Endpoint, Content }];
+        find.save();
+        res.status(200).json({ message: "Succesfully Updated your Breakpoint" });
       } else {
-        console.log(3);
-        res.end();
+        res.status(400).json({ message: "Something went wrong!" });
       }
     }
   } catch (e) {
-    console.log(e);
-    res.end();
+    res.status(400).json({ message: "Something went wrong!" });
     return;
   }
 });
