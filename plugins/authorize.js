@@ -40,7 +40,7 @@ export const AuthorizePrivate = async (req, res, next) => {
 
   if (header) {
     const token = header.split(" ")[1];
-    jwt.verify(token, process.env.JWT_PRIVATE_SECRET, (err, doc) => {
+    jwt.verify(token, data.uuid, (err, doc) => {
       if (err) {
         res.sendStatus(403);
         return;
