@@ -1,11 +1,32 @@
 import { Router } from "express";
+import jwt from "jsonwebtoken";
 const route = Router();
 
 // Models
 import { endPointSchema } from "@models/services.model";
+import { SignupSchema } from "@models/auth.model";
 
 // Plugins
 import { AuthorizePanel } from "@plugins/authorize";
+
+route.get("/privatetoken", AuthorizePanel, async (req, res) => {
+  const { role, username, userid } = req.user;
+  if (!role && !username && !userid) {
+    res.sendStatus(401);
+    return;
+  }
+
+  const find = await SignupSchema.findOne({ _id: userid });
+  if (!find) {
+    res.status(403).json({ message: "Couldn't find any endpoint" });
+    return;
+  }
+
+  const token = jwt.sign(find.username.toString(), find._id.toString());
+
+  res.status(200).json({ message: token });
+  return;
+});
 
 route.post("/endpoint", AuthorizePanel, async (req, res) => {
   const { role, username, userid } = req.user;
@@ -21,12 +42,12 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
   }
 
   const find = await endPointSchema.findOne({ user_id: userid });
-  const content = (Content).split(" ").join("")
+  const content = Content.split(" ").join("");
   try {
     if (!find) {
       const data = new endPointSchema({
         user_id: userid,
-        endpoint: [{ point: Endpoint, content}],
+        endpoint: [{ point: Endpoint, content }],
         date: Date.now(),
       });
       await data.save();
