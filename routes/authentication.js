@@ -70,6 +70,7 @@ route.post("/signin", async (req, res) => {
     res.status(200).json({
       token: jwt.sign(
         {
+          userid: find._id,
           role: find.role,
           username: find.username,
         },

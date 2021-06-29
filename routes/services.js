@@ -8,8 +8,8 @@ import { endPointSchema } from "@models/services.model";
 import { AuthorizePanel } from "@plugins/authorize";
 
 route.post("/endpoint", AuthorizePanel, async (req, res) => {
-  const { role, username, uuid } = req.user;
-  if (!role && !username && !uuid) {
+  const { role, username, userid } = req.user;
+  if (!role && !username && !userid) {
     res.sendStatus(401);
     return;
   }
@@ -20,12 +20,13 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
     return;
   }
 
+  const find = await endPointSchema.findOne({ user_id: userid });
+  const content = (Content).split(" ").join("")
   try {
-    const find = await endPointSchema.findOne({ uuid: uuid });
     if (!find) {
       const data = new endPointSchema({
-        uuid: uuid,
-        endpoint: [{ point: Endpoint, Content }],
+        user_id: userid,
+        endpoint: [{ point: Endpoint, content}],
         date: Date.now(),
       });
       await data.save();
@@ -33,7 +34,7 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
       return;
     } else {
       if (find.endpoint) {
-        find.endpoint = [{ point: Endpoint, Content }];
+        find.endpoint = [{ point: Endpoint, content }];
         find.save();
         res.status(200).json({ message: "Succesfully Updated your Breakpoint" });
       } else {
