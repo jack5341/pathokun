@@ -1,15 +1,15 @@
 {
-  "name": "project-a-server",
+  "name": "pathokun-server",
   "version": "1.0.0",
-  "description": "Breakpoint creater server",
+  "description": "A path generater, update your content just with your frontend by HTTP GET Request!s",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec node_modules/.bin/babel-node index.js",
-    "start": "node index.js"
+    "start": "babel-node index.js"
   },
   "author": "Nedim Akar (nedim.akar53411@gmail.com)",
-  "license": "MIT",
+  "license": "Apache",
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.12.14",
