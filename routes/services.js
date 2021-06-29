@@ -22,7 +22,7 @@ route.get("/privatetoken", AuthorizePanel, async (req, res) => {
     return;
   }
 
-  const token = jwt.sign(find.username.toString(), find._id.toString());
+  const token = jwt.sign(find._id.toString(), find._id.toString());
 
   res.status(200).json({ message: token });
   return;

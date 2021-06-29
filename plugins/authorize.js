@@ -16,7 +16,7 @@ export const AuthorizePanel = (req, res, next) => {
       req.user = user;
       next();
     });
-  }else {
+  } else {
     res.sendStatus(403);
     return;
   }
@@ -33,15 +33,15 @@ export const AuthorizePrivate = async (req, res, next) => {
     return;
   }
 
-  const data = await endPointSchema.findOne({ user_id: find.uuid });
-  if(!data){
-    res.status(403).json({ message: "Invalid Endpoint" })
-    return
+  const data = await endPointSchema.findOne({ user_id: find._id });
+  if (!data) {
+    res.status(403).json({ message: "Invalid Endpoint" });
+    return;
   }
 
   if (header) {
     const token = header.split(" ")[1];
-    jwt.verify(token, data.user_id, (err, doc) => {
+    jwt.verify(token, find._id.toString(), (err, doc) => {
       if (err) {
         res.sendStatus(403);
         return;
@@ -49,7 +49,8 @@ export const AuthorizePrivate = async (req, res, next) => {
       req.uuid = doc;
       next();
     });
+  } else {
+    res.status(403).json({ message: "You have to set your token as authorization" });
+    return;
   }
-  res.status(403).json({ message: "You have to set your token as authorization" });
-  return;
 };
