@@ -33,7 +33,7 @@ export const AuthorizePrivate = async (req, res, next) => {
     return;
   }
 
-  const data = await endPointSchema.findOne({ uuid: find.uuid });
+  const data = await endPointSchema.findOne({ user_id: find.uuid });
   if(!data){
     res.status(403).json({ message: "Invalid Endpoint" })
     return
@@ -41,7 +41,7 @@ export const AuthorizePrivate = async (req, res, next) => {
 
   if (header) {
     const token = header.split(" ")[1];
-    jwt.verify(token, data.uuid, (err, doc) => {
+    jwt.verify(token, data.user_id, (err, doc) => {
       if (err) {
         res.sendStatus(403);
         return;
