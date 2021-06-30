@@ -8,7 +8,9 @@ Pathokun, a path generater, update your content just with your frontend by HTTP 
 
 ### **Add new path to account**
   
-Pathokun is an solution for frontend developers. After you Sign in to Pathokun, can add new path or endpoint whatever is name. eg: 
+Pathokun is an solution for frontend developers. After you Sign in to Pathokun, can add new path or endpoint whatever is name. 
+
+eg: 
  
 ```sh
 curl --insecure -XPOST 
@@ -21,6 +23,8 @@ curl --insecure -XPOST
 
 Whenever you want fetch your content by pathname, firstly have to generate an private access token from *`/s/privatetoken`* with your sign in token.Then **authorize.js** plugin will verify your token with your secret code, after authorize you can go foward to *`/s/privatetoken`*.  This path will generate a token and sign by your id from database and this token is must be **SUPER SECRET**.
 
+eg:
+
 ```sh
 curl -XGET 
 -H 'Bearer: Your Token' 'localhost:4000/s/privatetoken'
@@ -28,3 +32,21 @@ curl -XGET
 
 > THIS GENERATED TOKEN IS MUST BE SECRET !!!
 
+### **Fetch content from path**
+So after you have generate a private token you can directly access your content by pathname.Just you have to put your private token to header with **bearer** and sending a GET Request. 
+
+```sh
+curl -XGET 
+-H 'Bearer: Your Secret Token' 'localhost:4000/e/<your username>/<your pathname>'
+```
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## Show your support
+
+Give a ⭐️ if this project helped you! or buy me a 🍺
+<a href="https://www.paypal.com/paypalme/nedimakar5341">Paypal</a>
+
+## License
+[Apache-2.0](https://choosealicense.com/licenses/apache-2.0/)
