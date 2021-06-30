@@ -54,6 +54,51 @@ curl -XGET
 | :-- | :-- | :-- | :-- | :-- |
 | `ObjectId(id)` | `array` | `string` | `string` | `string`
 
+
+## Install Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Pathokun/Pathokun.git
+```
+
+Go to the project directory
+
+```bash
+  cd Pathokun
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+> Don't forget to add `.env` file
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`DB_STRING`
+
+`JWT_SECRET`
+
+`JWT_EXPIRES`
+
+`JWT_PRIVATE_SECRET`
+
+`JWT_RESET_SECRET`
+
+`JWT_RESET_EXPIRE`
+
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
