@@ -40,6 +40,20 @@ curl -XGET
 -H 'Bearer: Your Secret Token' 'localhost:4000/e/<your username>/<your pathname>'
 ```
 
+## Database Schema **(Mongodb)**
+
+### `users` collection
+
+| _id | role | reset_token | email | username | password | date | _v |
+| :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- |
+| `ObjectId(id)` | `int` | `string` | `string` | `string` | `string` | `date` | `int` |
+
+### `endpoints` collection
+
+| _id | endpoint | user_id | date | _v | 
+| :-- | :-- | :-- | :-- | :-- |
+| `ObjectId(id)` | `array` | `string` | `string` | `string`
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
