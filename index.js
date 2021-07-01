@@ -11,10 +11,10 @@ import AUTH from "@routes/authentication";
 import SERVICES from "@routes/services";
 import ENDPOINT from "@routes/enpoints";
 
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 app.use("/a", AUTH);
 app.use("/s", SERVICES);
 app.use("/e", ENDPOINT);

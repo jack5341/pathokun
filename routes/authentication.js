@@ -23,7 +23,7 @@ route.post("/signup", async (req, res) => {
   const find = await SignupSchema.findOne({ email: Email });
 
   if (find) {
-    res.status(409).json({ message: "You have already a account with this email." });
+    res.status(409).json({ message: "You have already an account with this email." });
     return;
   }
 
