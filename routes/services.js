@@ -68,4 +68,21 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
   }
 });
 
+route.get("/endpoint", AuthorizePanel, async (req, res) => {
+  const { role, username, userid } = req.user;
+  if (!role && !username && !userid) {
+    res.sendStatus(401);
+    return;
+  }
+
+  const find = await endPointSchema.findOne({ user_id: userid });
+  if (!find) {
+    res.status(403).json({ message: "Couldn't find any endpoint" });
+    return;
+  }
+
+  res.status(200).json(find.endpoint);
+  return;
+});
+
 export default route;
