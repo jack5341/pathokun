@@ -92,7 +92,6 @@ route.get("/endpoint", AuthorizePanel, async (req, res) => {
   }
 
   const find = await endPointSchema.findOne({ user_id: userid });
-  console.log(find);
   if (!find) {
     res.status(403).json({ message: "Couldn't find any endpoint" });
     return;
@@ -105,6 +104,21 @@ route.get("/endpoint", AuthorizePanel, async (req, res) => {
     date: find.date,
   });
   return;
+});
+
+route.patch("/endpoint", AuthorizePanel, async (req, res) => {
+  const { userid } = req.user;
+  const { index } = req.params;
+
+  const find = await endPointSchema.findOne({ user_id: userid });
+  if (!find) {
+    res.status(403).json({ message: "Something went wrong" });
+    return;
+  }
+
+  find.endpoint.splice(index, 1);
+  find.save();
+  res.status(200).json({ message: "Endpoint deleted succesfully" });
 });
 
 export default route;
