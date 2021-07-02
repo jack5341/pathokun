@@ -6,9 +6,9 @@
       {
         "root": ["."],
         "alias": {
-          "@plugins": "./plugins/",
-          "@models": "./models/",
-          "@routes": "./routes/"
+          "@plugins": "./src/plugins/",
+          "@models": "./src/models/",
+          "@routes": "./src/routes/"
         }
       }
     ]
