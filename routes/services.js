@@ -35,7 +35,7 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
     return;
   }
 
-  const { Endpoint, Content } = req.body;
+  const { Endpoint, Content, Description } = req.body;
   if (Endpoint === username) {
     res.status(403).json({ message: "Endpoint can not be same with your username!" });
     return;
@@ -47,7 +47,15 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
     if (!find) {
       const data = new endPointSchema({
         user_id: userid,
-        endpoint: [{ point: Endpoint, content }],
+        endpoint: [
+          {
+            point: Endpoint,
+            content: content,
+            description: Description,
+            status: "1",
+            date: Date.now(),
+          },
+        ],
         date: Date.now(),
       });
       await data.save();
@@ -55,7 +63,15 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
       return;
     } else {
       if (find.endpoint) {
-        find.endpoint = [{ point: Endpoint, content }];
+        find.endpoint = [
+          {
+            point: Endpoint,
+            content: content,
+            description: Description,
+            status: 1,
+            date: Date.now(),
+          },
+        ];
         find.save();
         res.status(200).json({ message: "Succesfully Updated your Breakpoint" });
       } else {
@@ -76,12 +92,18 @@ route.get("/endpoint", AuthorizePanel, async (req, res) => {
   }
 
   const find = await endPointSchema.findOne({ user_id: userid });
+  console.log(find);
   if (!find) {
     res.status(403).json({ message: "Couldn't find any endpoint" });
     return;
   }
 
-  res.status(200).json(find.endpoint);
+  res.status(200).json({
+    endpoint: find.endpoint,
+    status: find.status,
+    description: find.description,
+    date: find.date,
+  });
   return;
 });
 

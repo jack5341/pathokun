@@ -75,7 +75,6 @@ route.post("/signin", async (req, res) => {
           username: find.username,
         },
         process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRES }
       ),
     });
     return;

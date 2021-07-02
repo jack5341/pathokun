@@ -9,6 +9,7 @@ export const AuthorizePanel = (req, res, next) => {
   if (authHeader) {
     const token = authHeader.split(" ")[1];
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+      console.log(user);  
       if (err) {
         res.sendStatus(403);
         return;
