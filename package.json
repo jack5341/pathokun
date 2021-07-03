@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec babel-node ./src/index.js",
     "build": "babel src --out-dir dist",
-    "start": "npm run build && node dist/index.js"
+    "start": "npm run build && babel-node dist/index.js"
   },
   "author": "Nedim Akar (nedim.akar53411@gmail.com)",
   "license": "Apache",
