@@ -44,15 +44,15 @@ curl -XGET
 
 ### `users` collection
 
-| _id | role | reset_token | email | username | password | date | _v |
-| :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- |
-| `ObjectId(id)` | `int` | `string` | `string` | `string` | `string` | `date` | `int` |
+| _id            | role  | reset_token | email    | username | password | date   | _v    |
+| :------------- | :---- | :---------- | :------- | :------- | :------- | :----- | :---- |
+| `ObjectId(id)` | `int` | `string`    | `string` | `string` | `string` | `date` | `int` |
 
 ### `endpoints` collection
 
-| _id | endpoint | user_id | date | _v | 
-| :-- | :-- | :-- | :-- | :-- |
-| `ObjectId(id)` | `array` | `string` | `string` | `string`
+| _id            | endpoint | user_id  | date     | _v       |
+| :------------- | :------- | :------- | :------- | :------- |
+| `ObjectId(id)` | `array`  | `string` | `string` | `string` |
 
 
 ## Install Locally
@@ -86,17 +86,15 @@ Start the server
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`DB_STRING`
+`DB_STRING` =  *Your MongoDB string*
 
-`JWT_SECRET`
+`JWT_SECRET`  = *Secret key for sign login token*
 
-`JWT_EXPIRES`
+`JWT_PRIVATE_SECRET` = *Secret key for private token*
 
-`JWT_PRIVATE_SECRET`
+`JWT_RESET_SECRET` = *Secret key for reset password token*
 
-`JWT_RESET_SECRET`
-
-`JWT_RESET_EXPIRE`
+`JWT_RESET_EXPIRE` = *Expire time for reset password token (1h,30m,1d)*
 
 
 ## Contributing
