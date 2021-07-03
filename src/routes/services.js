@@ -47,15 +47,7 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
     if (!find) {
       const data = new endPointSchema({
         user_id: userid,
-        endpoint: [
-          {
-            point: Endpoint,
-            content: content,
-            description: Description,
-            status: "1",
-            date: Date.now(),
-          },
-        ],
+        endpoint: [find.endpoint],
         date: Date.now(),
       });
       await data.save();
@@ -64,6 +56,7 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
     } else {
       if (find.endpoint) {
         find.endpoint = [
+          ...find.endpoint,
           {
             point: Endpoint,
             content: content,
