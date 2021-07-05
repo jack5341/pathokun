@@ -42,7 +42,6 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
   }
 
   const find = await endPointSchema.findOne({ user_id: userid });
-  const content = Content.split(" ").join("");
   try {
     if (!find) {
       const data = new endPointSchema({
@@ -59,7 +58,7 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
           ...find.endpoint,
           {
             point: Endpoint,
-            content: content,
+            content: Content,
             description: Description,
             status: 1,
             date: Date.now(),
