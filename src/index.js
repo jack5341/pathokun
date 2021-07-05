@@ -19,6 +19,12 @@ app.use("/a", AUTH);
 app.use("/s", SERVICES);
 app.use("/e", ENDPOINT);
 
+app.get("/", (req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.write('<h1>Hello from Pathokun!</h1>');
+  res.end();
+});
+
 mongoose.connect(
   process.env.DB_STRING,
   {
