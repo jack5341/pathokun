@@ -54,6 +54,12 @@ curl -XGET
 | :------------- | :------- | :------- | :------- | :------- |
 | `ObjectId(id)` | `array`  | `string` | `string` | `string` |
 
+### `endpoint (element)`
+
+| point            | content | description  | status     | date       |
+| :------------- | :------- | :------- | :------- | :------- |
+| `string` | `string`  | `string` | `int` | `date` |
+
 
 ## Install Locally
 
