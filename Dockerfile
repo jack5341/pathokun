@@ -1,4 +1,4 @@
-FROM node:14-alphine
+FROM node:14-alpine
 
 WORKDIR /usr/src/app
 
@@ -8,6 +8,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD ["npm", "run", "dev"]
