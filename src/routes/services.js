@@ -46,7 +46,13 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
     if (!find) {
       const data = new endPointSchema({
         user_id: userid,
-        endpoint: [find.endpoint],
+        endpoint: [{
+          point: Endpoint,
+          content: Content,
+          description: Description,
+          status: 1,
+          date: Date.now(),
+        }],
         date: Date.now(),
       });
       await data.save();
@@ -64,6 +70,7 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
             date: Date.now(),
           },
         ];
+        find.date = Date.now();
         find.save();
         res.status(200).json({ message: "Succesfully Updated your Breakpoint" });
       } else {
@@ -71,6 +78,7 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
       }
     }
   } catch (e) {
+    console.log(e);
     res.status(400).json({ message: "Something went wrong!" });
     return;
   }
