@@ -108,7 +108,7 @@ route.get("/endpoint", AuthorizePanel, async (req, res) => {
 
 route.patch("/endpoint", AuthorizePanel, async (req, res) => {
   const { userid } = req.user;
-  const { index } = req.params;
+  const { index } = req.query;
 
   const find = await endPointSchema.findOne({ user_id: userid });
   if (!find) {
