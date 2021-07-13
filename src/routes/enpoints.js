@@ -5,7 +5,7 @@ const route = Router();
 import { endPointSchema } from "@models/services.model";
 
 // Plugins
-import { AuthorizePrivate } from "@plugins/authorize";
+import { AuthorizePrivate } from "@middlewares/authorize";
 
 route.get("/:usr/:point", AuthorizePrivate, async (req, res) => {
   const { point } = req.params;

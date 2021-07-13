@@ -7,7 +7,7 @@ import { endPointSchema } from "@models/services.model";
 import { SignupSchema } from "@models/auth.model";
 
 // Plugins
-import { AuthorizePanel } from "@plugins/authorize";
+import { AuthorizePanel } from "@middlewares/authorize";
 
 route.get("/privatetoken", AuthorizePanel, async (req, res) => {
   const { role, username, userid } = req.user;
@@ -41,47 +41,41 @@ route.post("/endpoint", AuthorizePanel, async (req, res) => {
     return;
   }
 
-  const find = await endPointSchema.findOne({ user_id: userid });
-  try {
-    if (!find) {
-      const data = new endPointSchema({
-        user_id: userid,
-        endpoint: [{
-          point: Endpoint,
-          content: Content,
-          description: Description,
-          status: 1,
-          date: Date.now(),
-        }],
-        date: Date.now(),
-      });
-      await data.save();
-      res.status(200).json({ message: "Succesfully Created new Breakpoint" });
-      return;
-    } else {
-      if (find.endpoint) {
-        find.endpoint = [
-          ...find.endpoint,
-          {
-            point: Endpoint,
-            content: Content,
-            description: Description,
-            status: 1,
-            date: Date.now(),
-          },
-        ];
-        find.date = Date.now();
-        find.save();
-        res.status(200).json({ message: "Succesfully Updated your Breakpoint" });
-      } else {
-        res.status(400).json({ message: "Something went wrong!" });
-      }
-    }
-  } catch (e) {
-    console.log(e);
-    res.status(400).json({ message: "Something went wrong!" });
-    return;
-  }
+  // const find = await endPointSchema.findOne({ user_id: userid });
+  // try {
+  //   if (!find) {
+  //     const data = new endPointSchema({
+  //       user_id: userid,
+  //       endpoint: [{
+  //         point: Endpoint,
+  //         content: Content,
+  //         description: Description,
+  //         status: 1,
+  //         date: Date.now(),
+  //       }],
+  //       date: Date.now(),
+  //     });
+  //     await data.save();
+  //     res.status(200).json({ message: "Succesfully Created new Breakpoint" });
+  //     return;
+  //   } else {
+  //     if (find.endpoint) {
+  //       find.endpoint.description = Description
+  //       find.save()
+  //       // const arr = find.endpoint
+  //       // const filteredArr = arr.filter(x => x.point === Endpoint)
+  //       // filteredArr[0].content = Content;
+  //       // filteredArr[0].date = Date.now()
+  //       // res.status(200).json({ message: "Succesfully Updated your Breakpoint" });
+  //     } else {
+  //       res.status(400).json({ message: "Something went wrong!" });
+  //     }
+  //   }
+  // } catch (e) {
+  //   console.log(e);
+  //   res.status(400).json({ message: "Something went wrong!" });
+  //   return;
+  // }
 });
 
 route.get("/endpoint", AuthorizePanel, async (req, res) => {

@@ -13,6 +13,7 @@ export const AuthorizePanel = (req, res, next) => {
         res.sendStatus(403);
         return;
       }
+      console.log(user)
       req.user = user;
       next();
     });
@@ -21,6 +22,24 @@ export const AuthorizePanel = (req, res, next) => {
     return;
   }
 };
+
+export const RoleChecker = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+      if (err) {
+        res.sendStatus(403);
+        return;
+      }
+      role = user.role;
+      next();
+    });
+  } else {
+    res.sendStatus(403);
+    return;
+  }
+}
 
 export const AuthorizePrivate = async (req, res, next) => {
   const header = req.headers.authorization;
