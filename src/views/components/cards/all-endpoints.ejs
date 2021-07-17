@@ -1,0 +1,10 @@
+<div class="rounded h-100  bg-white border shadow-sm p-3">
+    <p class="h2">All Endpoints</p>
+    <div class="w-100 border-top overflow-auto" style="height: 415px;overflow-x: hidden !important;">
+        <% if (data.endpoint) { %>
+            <% data.endpoint.map((e,key) => { %>
+                <%- include('../shared/endpoint-element', {e: e, i: key}); %>
+            <% }) %>
+        <% } %>
+    </div>
+</div>

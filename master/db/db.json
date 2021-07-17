@@ -1,1 +1,12 @@
-{"uuid":"93a2ef72-c646-45ee-9fd9-c5063243fa0e","secret_key":"$2b$12$Bp/WKyEKmf8w09oq4hspGOC5FdhCjgolHYA5oiBJF9bgZMkQgu58S"}
+{
+    "uuid": "4fa6b890-ba64-4ba2-bba2-23a8438839e5",
+    "secret_key": "$2b$12$MbPQAEUNXI3FV97krRmZGOGnilpA9dTz7jJClYFHk6SevcN937Ipq",
+    "endpoint": [{
+        "url": "invoiceprinter",
+        "description": "Invoice Printer description"
+    },
+    {
+        "url": "worldisfunny",
+        "description": "This is description"
+    }]
+}

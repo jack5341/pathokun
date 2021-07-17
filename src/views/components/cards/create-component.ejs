@@ -1,0 +1,47 @@
+<div class="rounded bg-white border shadow-sm p-3">
+    <p class="h2">Create Endpoint</p>
+    <form>
+        <label for="endpoint-url" class="form-label">Endpoint name:</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3">subdomain.domain/</span>
+            <input required type="text" placeholder="endpointname" class="form-control" id="endpoint-url">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <input type="text" class="form-control" id="description"
+                placeholder="This is description for that endpoint.">
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Content:</label>
+            <textarea required rows="6" class="form-control" style="resize: none;" id="content"
+                placeholder="You can paste here what you want ! eg. JSON,YAML or a programming language code which you want."></textarea>
+        </div>
+        <button onclick="createEndpoint()" class="btn w-100 btn-primary" type="button">
+            Submit
+        </button>
+    </form>
+</div>
+
+<script>
+    async function createEndpoint(e) {
+        const url = document.getElementById("endpoint-url").value;
+        const description = document.getElementById("description").value;
+        const content = document.getElementById("content").value;
+        
+        if(url === '' || description === '' || content === '') {
+            alert('Please fill all the fields.');
+            return
+        }
+
+        const endpoint = await fetch(`/api/point`, {
+            method: 'POST',
+            body: {
+                url: url,
+                description: description,
+                content: content,
+                date: new Date().toISOString()
+            }
+        })
+    }
+</script>
