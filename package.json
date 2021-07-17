@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec babel-node ./src/index.js",
     "build": "babel src --out-dir dist",
-    "start": "npm run build && babel-node dist/index.js"
+    "start": "npm run build && babel-node dist/index.js",
+    "db": "babel-node ./utils/createdb.js"
   },
   "author": "Nedim Akar (nedim.akar53411@gmail.com)",
   "license": "Apache",
@@ -17,12 +18,13 @@
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "figlet": "^1.5.0",
+    "fs-extra": "^10.0.0",
+    "inquirer": "^8.1.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.14",
     "nodemailer": "^6.6.2",
     "open": "^8.2.1",
-    "path": "^0.12.7",
-    "yup": "^0.32.9"
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",

@@ -43,10 +43,13 @@
 
                         <div class="mb-3">
                             <label for="description" class="form-label">Content:</label>
-                            <textarea rows="6" class="form-control" id="content"
+                            <textarea rows="6" class="form-control" style="resize: none;" id="content"
                                 placeholder="You can paste here what you want ! eg. JSON,YAML or a programming language code which you want."></textarea>
                         </div>
-                        <button type="submit" class="btn w-100 btn-primary">Submit</button>
+                        <button class="btn w-100 btn-primary" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Sending...
+                        </button>
                     </form>
                 </div>
             </div>
