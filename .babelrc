@@ -9,7 +9,8 @@
           "@plugins": "./src/plugins/",
           "@middlewares": "./src/middlewares/",
           "@models": "./src/models/",
-          "@routes": "./src/routes/"
+          "@routes": "./src/routes/",
+          "@views": "./src/views/"
         }
       }
     ]
