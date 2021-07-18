@@ -9,8 +9,16 @@
 
 <script>
     async function getToken() {
-        const res = await fetch('/api/getprivtoken')
-        const data = await res.json()
-        alert(`Secret Token: ${data.token}`)
+        await fetch('/api/getprivtoken', {
+            method: 'GET',
+        })
+        .then(async res => {
+            if (!res.ok){
+                return alert("An error occurred while getting your token")
+            }
+
+            const data = await res.json()
+            alert(`Your token is: ${data.token}`)
+        })
     }
 </script>

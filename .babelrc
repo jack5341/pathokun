@@ -8,7 +8,8 @@
         "alias": {
           "@routes": "./src/routes/",
           "@db": "./master/db/",
-          "@views": "./src/views/"
+          "@views": "./src/views/",
+          "@middlewares": "./src/middlewares/"
         }
       }
     ]

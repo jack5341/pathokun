@@ -37,8 +37,14 @@
 
 <script>
   async function deleteEndpoint(index){
-    const data = await fetch(`/api/point?index=${index}`, {
+    await fetch(`/api/point?index=${index}`, {
       method: 'delete',
+    }).then(res => {
+      if(!res.ok) {
+        return alert("Something went wrong!")
+      }
+
+      window.location.reload()
     })
   }
 </script>
