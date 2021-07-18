@@ -1,9 +1,10 @@
 node_modules
 
+master/db
+
 /.vscode/
 
 .env
 
 dist
 
-./master/db
