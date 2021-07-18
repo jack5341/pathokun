@@ -13,6 +13,7 @@ route.get("/getprivtoken", (req, res) => {
 })
 
 route.post("/point", async(req,res) => {
+    console.log(req.body)
     const { url, description, content, date } = req.body
     console.log(req.body)
 
@@ -56,7 +57,7 @@ route.delete("/point", async(req,res) => {
 route.get("/fetch/:point", fetchAuthorize, (req,res) => {
     const index = db.endpoint.findIndex(x => x.url === req.params.point)
 
-    if(!index){
+    if(!index == null){
         res.status(400).send("Bad Request")
         return
     }

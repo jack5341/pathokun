@@ -26,5 +26,5 @@ app.get("/", async(req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-// open(`http://localhost:${PORT}`);
+open(`http://localhost:${PORT}`);
 app.listen(PORT);

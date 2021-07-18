@@ -1,78 +1,78 @@
-![Pathokun Image](master/img/Pathokun.png)
+![image](https://user-images.githubusercontent.com/53150440/126082539-4477da7b-7e48-495e-8c7e-77bc123cd1e7.png)
 
 # Pathokun 
 
 Pathokun, a path generater, update your content just with your frontend by HTTP GET Request! In this way you can make Full-Stack project without any backend with any programming language.
 
-## Working Principe
+## What does the Pathokun solve?
+Pathokun removes the taboo that you can't have a Full-Stack project without a backend.
 
-### **Add new path to account**
-  
-Pathokun is an solution for frontend developers. After you Sign in to Pathokun, can add new path or endpoint whatever is name. 
 
-eg: 
- 
-```sh
-curl --insecure -XPOST 
--H 'Bearer: Your Token'
--H "Content-type: application/json" 
--d '{"Endpoint": "invoiceprinter", "Content": "{   "sub": "dwqdwqdwqdwqdwqdwqdwqdwq",   "name": "John Doe",   "iat": 1516239022 }"}' 'localhost:4000/s/endpoint'
-```
+## Workprincpe
 
-### **Generate a private token**
+![image](https://user-images.githubusercontent.com/53150440/126083571-31cceb9e-60bc-4efd-8152-4ae24a6d5620.png)
 
-Whenever you want fetch your content by pathname, firstly have to generate an private access token from *`/s/privatetoken`* with your sign in token.Then **authorize.js** plugin will verify your token with your secret code, after authorize you can go foward to *`/s/privatetoken`*.  This path will generate a token and sign by your id from database and this token is must be **SUPER SECRET**.
+### Environment Variables
+
+Firstly you will need to add the following environment variables to your .env file
+
+`JWT_PRIVATE_SECRET` = *Secret key for private token*
+
+### **Add New Path to Account**
+
+![Pathokun Create Endpoint](master/img/create-point.gif)
+
+According to the Pathokun use purpose, you must first create a endpoint by have in user panel create endpoint form.
 
 eg:
 
-```sh
-curl -XGET 
--H 'Bearer: Your Token' 'localhost:4000/s/privatetoken'
-```
+![image](https://user-images.githubusercontent.com/53150440/126082322-8a00bc71-a272-4055-ba8a-11053f5337d7.png)
+
+### **Generate Private Token**
+Whenever you want fetch your content by pathname, firstly have to generate an private access token from user panel.
+
+eg:
+
+![image](https://user-images.githubusercontent.com/53150440/126082355-7882e05a-e131-4e16-a05c-bf6d7167bb7b.png)
+
+### **Fetch Content from Endpoint**
+So after you have generate a private token you can directly access your content by endpoint.Just you have to put your private token
+to header with bearer and sending a GET Request.
+
+eg: 
+![image](https://user-images.githubusercontent.com/53150440/126082366-e15b03b8-8eeb-4332-90d9-f17b79674e6e.png)
 
 > THIS GENERATED TOKEN IS MUST BE SECRET !!!
 
-### **Fetch content from path**
-So after you have generate a private token you can directly access your content by pathname.Just you have to put your private token to header with **bearer** and sending a GET Request. 
+![Pathokun Fetch Content](master/img/fetch-content.gif)
 
-```sh
-curl -XGET 
--H 'Bearer: Your Secret Token' 'localhost:4000/e/<your username>/<your pathname>'
-```
-
-## Database Schema **(Mongodb)**
-
-### `users` collection
-
-| _id            | role  | reset_token | email    | username | password | date   | _v    |
-| :------------- | :---- | :---------- | :------- | :------- | :------- | :----- | :---- |
-| `ObjectId(id)` | `int` | `string`    | `string` | `string` | `string` | `date` | `int` |
-
-### `endpoints` collection
-
-| _id            | endpoint | user_id  | date     | _v       |
-| :------------- | :------- | :------- | :------- | :------- |
-| `ObjectId(id)` | `array`  | `string` | `string` | `string` |
-
-### `endpoint (element)`
-
-| point            | content | description  | status     | date       |
-| :------------- | :------- | :------- | :------- | :------- |
-| `string` | `string`  | `string` | `int` | `date` |
+### **Database Schema**
 
 
-## Install Locally
+| uuid | secret_key | endpoint |
+| :--- | :--------- | :------- |
+| `string` | `string` | `array` |
+
+
+### ***endpoint* Schema**
+
+| url | description | content | date
+| :--- | :--------- | :------- | :---
+| `string` | `string` | `string` | `date`
+
+
+## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://github.com/Pathokun/Pathokun.git
+  git clone git@github.com:Pathokun/pathokun.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd Pathokun
+  cd pathokun
 ```
 
 Install dependencies
@@ -86,22 +86,19 @@ Start the server
 ```bash
   npm run dev
 ```
-> Don't forget to add `.env` file
 
-## Environment Variables
+## Docker Image
 
-To run this project, you will need to add the following environment variables to your .env file
+Build Dockerfile
 
-`DB_STRING` =  *Your MongoDB string*
+```bash
+  docker build . -t pathokun
+```
 
-`JWT_SECRET`  = *Secret key for sign login token*
-
-`JWT_PRIVATE_SECRET` = *Secret key for private token*
-
-`JWT_RESET_SECRET` = *Secret key for reset password token*
-
-`JWT_RESET_EXPIRE` = *Expire time for reset password token (1h,30m,1d)*
-
+Run Docker Image
+```bash
+  docker run <CONTAINER_ID>
+```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -112,4 +109,5 @@ Give a ⭐️ if this project helped you! or buy me a 🍺
 <a href="https://www.paypal.com/paypalme/nedimakar5341">Paypal</a>
 
 ## License
-[Apache-2.0](https://choosealicense.com/licenses/apache-2.0/)
+[MIT](https://choosealicense.com/licenses/MIT/)
+  
