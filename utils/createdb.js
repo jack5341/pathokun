@@ -3,7 +3,6 @@ import crypto from "crypto";
 import figlet from "figlet";
 import path from "path";
 import inquirer from "inquirer";
-import bcrypt from "bcrypt";
 
 (async() => {
   console.clear();
@@ -13,7 +12,7 @@ import bcrypt from "bcrypt";
   const answers = await inquirer.prompt({name: "secretkey", type: "password", message: "Enter you SUPER SECRET KEY :"})
   fs.writeJSON(path.join(__dirname, "..", "master", ".", "db", "db.json"), {
     uuid: crypto.randomUUID(),
-    secret_key: bcrypt.hashSync(answers.secretkey, 12),
+    secret_key: answers.secretkey,
   });
   console.log("\n Database created succesfully ! \n")
 })();

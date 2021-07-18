@@ -1,0 +1,16 @@
+<div class="rounded bg-white border shadow-sm p-3">
+    <p class="h2">Get Private Token</p>
+    <p class="text-muted">
+        This SUPER SECRET TOKEN is an token for fetch your content from the server by HTTP Request.
+        Put this token to your header as authorize.
+    </p>
+    <button class="btn btn-primary w-100" onclick="getToken()">Get Token</button>
+</div>
+
+<script>
+    async function getToken() {
+        const res = await fetch('/api/getprivtoken')
+        const data = await res.json()
+        alert(`Secret Token: ${data.token}`)
+    }
+</script>

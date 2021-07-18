@@ -6,10 +6,8 @@
       {
         "root": ["."],
         "alias": {
-          "@plugins": "./src/plugins/",
-          "@middlewares": "./src/middlewares/",
-          "@models": "./src/models/",
           "@routes": "./src/routes/",
+          "@db": "./master/db/",
           "@views": "./src/views/"
         }
       }

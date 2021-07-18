@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import dotenv, { parse } from "dotenv";
+import dotenv from "dotenv";
 import path from "path"
 import open from "open"
 import fs from "fs-extra"
@@ -9,7 +9,7 @@ const app = express();
 dotenv.config();
 
 // Routes
-import API from "./routes/api";
+import API from "@routes/api";
 
 app.use(cors());
 app.set("view-engine", "ejs")
