@@ -18,7 +18,8 @@
             }
 
             const data = await res.json()
-            alert(`Your token is: ${data.token}`)
+            navigator.clipboard.writeText(data.token)
+            alert(`Your token is copied succesfully`)
         })
     }
 </script>
