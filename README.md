@@ -2,7 +2,7 @@
 
 # Pathokun 
 
-Pathokun, a path generater, update your content just with your frontend by HTTP GET Request! In this way you can make Full-Stack project without any backend with any programming language.
+Pathokun, a path generator, update your content just with your frontend by HTTP GET Request! In this way you can make Full-Stack project without any backend with any programming language.
 
 ## What does the Pathokun solve?
 Pathokun removes the taboo that you can't have a Full-Stack project without a backend.
