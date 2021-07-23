@@ -13,16 +13,19 @@ route.get("/getprivtoken", (req, res) => {
 })
 
 route.post("/point", async(req,res) => {
-    console.log(req.body)
     const { url, description, content, date } = req.body
-    console.log(req.body)
 
     if(!url || !content) {
         res.status(400).send()
         return
     }
 
-    console.log(true)
+    if (!db.endpoint) {
+        db.endpoint = []
+        fs.writeJSON(path.join("master", ".", "db", "db.json"), db)
+        return
+    }
+
     const dbValiate = await db.endpoint.find(x => x.url === url)
 
     if(dbValiate) {
@@ -37,7 +40,7 @@ route.post("/point", async(req,res) => {
         date: date
     })
 
-    await fs.writeJSON(path.join("master", ".", "db", "db.json"), db)    
+    fs.writeJSON(path.join("master", ".", "db", "db.json"), db)
     return res.status(200).send()
 })
 
