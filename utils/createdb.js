@@ -10,6 +10,7 @@ import inquirer from "inquirer";
 \x1b[0m Pathokun, a endpoint generater, update your content just with your frontend by HTTP GET Request!
 `)
   const answers = await inquirer.prompt({name: "secretkey", type: "password", message: "Enter you SUPER SECRET KEY :"})
+  fs.mkdirpSync(path.join(__dirname, "..", "master", ".", "db"))
   fs.writeJSON(path.join(__dirname, "..", "master", ".", "db", "db.json"), {
     uuid: crypto.randomUUID(),
     secret_key: answers.secretkey,

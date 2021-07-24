@@ -1,4 +1,5 @@
-<div class="modal fade" id="<%= e.url %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+<!-- Delete Modal  -->
+<div class="modal fade" id="<%= e.url %>-delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -15,8 +16,31 @@
       </div>
     </div>
 </div>
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="<%= e.url %>-edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Do you need editing ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="deleteEndpoint(<%- i %>)">Yes, I am sure delete it.</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+
 <div class="w-full my-3 px-3 border container rounded shadow-sm" style="height: 50px;">
-    <div class="row">
+  <div class="row">
         <div class="col-4 d-flex align-items-center"
             style="height: 50px;">
             <tt class="badge bg-primary overflow-hidden"
@@ -29,8 +53,8 @@
         </div>
         <div class="col-4 d-flex align-items-center justify-content-end"
             style="height: 50px;">
-            <button class="btn btn-primary btn-sm mx-1" type="button">Edit</button>
-            <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#<%= e.url %>" type="button">Delete</button>
+            <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#<%= e.url %>-edit" type="button">Edit</button>
+            <button class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#<%= e.url %>-delete" type="button">Delete</button>
         </div>
     </div>
 </div>

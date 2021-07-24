@@ -1,44 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sceditor@3/minified/themes/default.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sceditor@3/minified/sceditor.min.js"></script>
     <title>Pathokun | User Panel</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        body {
-            background-color: whitesmoke !important;
-        }
+      body {
+        background-color: whitesmoke !important;
+      }
 
-        .mt-max {
-            margin-top: 5rem !important;
-        }
+      .mt-max {
+        margin-top: 5rem !important;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container-lg">
-        <a href="https://github.com/Pathokun" target="_blank" class="m-3 p-3 bold fw-normal text-white shadow bg-primary display-3">Pathokun</a>
-        <div class="row m-1 mt-max">
-            <div class="col-6">
-                <%- include('components/cards/create-component')%>
-            </div>
-            <div class="col-6">
-                <%- include('components/cards/all-endpoints'); %>
-            </div>
-            <div class="col-6 mt-3">
-                <%- include('components/cards/get-private'); %>
-            </div>
+      <a
+        href="https://github.com/Pathokun"
+        target="_blank"
+        class="m-3 p-3 bold fw-normal text-white shadow bg-primary display-3"
+        >Pathokun</a
+      >
+      <div class="row m-1 mt-max">
+        <script src="https://cdn.jsdelivr.net/npm/sceditor@3/minified/formats/xhtml.min.js"></script>
+        
+        <div class="col-6">
+          <%- include('components/cards/create-component')%>
         </div>
+        <div class="col-6">
+          <%- include('components/cards/all-endpoints'); %>
+        </div>
+        <div class="col-6 mt-3">
+          <%- include('components/cards/get-private'); %>
+        </div>
+      </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

@@ -11,7 +11,7 @@
     "db": "babel-node ./utils/createdb.js"
   },
   "author": "Nedim Akar (nedim.akar53411@gmail.com)",
-  "license": "Apache",
+  "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
