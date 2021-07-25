@@ -4,22 +4,19 @@
         This SUPER SECRET TOKEN is an token for fetch your content from the server by HTTP Request.
         Put this token to your header as authorize.
     </p>
-    <button class="btn btn-primary w-100" onclick="getToken()">Get Token</button>
+    <button id="get-priv-btn" class="btn btn-primary w-100">Get Token</button>
 </div>
 
 <script>
-    async function getToken() {
-        await fetch('/api/getprivtoken', {
-            method: 'GET',
-        })
-        .then(async res => {
-            if (!res.ok){
-                return alert("An error occurred while getting your token")
-            }
+    const getPrivBtn = document.getElementById('get-priv-btn')
 
-            const data = await res.json()
-            navigator.clipboard.writeText(data.token)
-            alert(`Your token is copied succesfully`)
-        })
+    getPrivBtn.onclick = async () => {
+        const res = await fetch('/api/getprivtoken')
+        if (!res.ok)
+            return alert("An error occurred while getting your token")
+
+        const data = await res.json()
+        navigator.clipboard.writeText(data.token)
+        alert(`Your token is copied succesfully`)
     }
 </script>

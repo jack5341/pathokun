@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec babel-node ./src/index.js",
     "build": "babel src --out-dir dist --copy-files",
-    "start": "npm run build && babel-node dist/index.js",
-    "db": "babel-node ./utils/createdb.js"
+    "start": "npm run build && babel-node dist/index.js"
   },
   "author": "Nedim Akar (nedim.akar53411@gmail.com)",
   "license": "MIT",
@@ -32,5 +31,8 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7"
+  },
+  "nodemonConfig": {
+    "ignore": "master/*"
   }
 }
