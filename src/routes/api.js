@@ -2,14 +2,15 @@ import { Router } from "express"
 import fs from "fs-extra"
 import path from "path"
 import jwt from "jsonwebtoken"
-const route = Router()
-
-import db from "@db/db.json"
 import { fetchAuthorize } from "@middlewares/authorize"
 
+const db = fs.readJsonSync(path.join(__dirname, '../../master/db/db.json'))
+const route = Router()
+
 route.get("/getprivtoken", (req, res) => {
-    const signedToken = jwt.sign({key: db.secret_key}, process.env.JWT_PRIVATE_SECRET) 
+    const signedToken = jwt.sign({ permissions: ["read"] }, process.env.SECRET_KEY)
     res.status(200).json({token: signedToken})
+    console.log(signedToken)
 })
 
 route.post("/point", async(req,res) => {
