@@ -7,7 +7,7 @@ import { fetchAuthorize } from "@middlewares/authorize"
 const db = fs.readJsonSync(path.join(__dirname, '../../master/db/db.json'))
 const route = Router()
 
-route.get("/getprivtoken", (req, res) => {
+route.get("/getprivtoken", (_, res) => {
     const signedToken = jwt.sign({ permissions: ["read"] }, process.env.SECRET_KEY)
     res.status(200).json({token: signedToken})
     console.log(signedToken)
@@ -21,28 +21,29 @@ route.post("/point", async(req,res) => {
         return
     }
 
-    if (!db.endpoint) {
-        db.endpoint = []
-        fs.writeJSON(path.join("master", ".", "db", "db.json"), db)
-        return
-    }
 
-    const dbValiate = await db.endpoint.find(x => x.url === url)
+    // if (!db.endpoint) {
+    //     db.endpoint = []
+    //     fs.writeJSON(path.join("master", ".", "db", "db.json"), db)
+    //     return
+    // }
 
-    if(dbValiate) {
-        res.status(400).send({message: "This url is already created!"})
-        return
-    }
+    // const dbValiate = await db.endpoint.find(x => x.url === url)
 
-    await db.endpoint.push({
-        url: url,
-        description: description,
-        content: content,
-        date: date
-    })
+    // if(dbValiate) {
+    //     res.status(400).send({message: "This url is already created!"})
+    //     return
+    // }
 
-    fs.writeJSON(path.join("master", ".", "db", "db.json"), db)
-    return res.status(200).send()
+    // await db.endpoint.push({
+    //     url: url,
+    //     description: description,
+    //     content: content,
+    //     date: date
+    // })
+
+    // fs.writeJSON(path.join("master", ".", "db", "db.json"), db)
+    // return res.status(200).send()
 })
 
 route.delete("/point", async(req,res) => {

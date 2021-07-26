@@ -4,7 +4,7 @@ dotenv.config();
 
 // db
 import * as utils from "./utils/index.js"
-utils.createDatabase()
+utils.checkEnv();
 
 // server
 import express from "express";
