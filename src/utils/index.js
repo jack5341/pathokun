@@ -17,30 +17,26 @@ export function createDatabase() {
 }
 
 export function checkEnv() {
-  const { DATABASE, DB_STRING, SECRET_KEY } = process.env;
+  const { DB, DB_STRING, SECRET_KEY } = process.env;
 
-  if (!DATABASE && !DB_STRING && !SECRET_KEY) {
-    console.log("Missing environment variables");
-    process.exit(1);
+  if (!DB && !DB_STRING && !SECRET_KEY) {
+    throw "Missing environment variables"
   }
 
-  switch (DATABASE) {
+  switch (DB) {
     case "MONGODB":
       MongoClient.connect(DB_STRING, (err, _) => {
         if (err) {
-          console.log(err);
-          process.exit(1);
+          throw err
         }
         console.log("Connected to MongoDB");
       });
       break;
 
     case "POSTGRESQL":
-      console.log("Not implemented yet");
-      break;
+      throw "Not implemented yet"
 
     default:
-      console.log("While check environments something went wrong...");
-      break;
+      throw "While check environments something went wrong..."
   }
 }
