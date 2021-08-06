@@ -14,8 +14,8 @@ route.get("/getprivtoken", (req, res) => {
     console.log(signedToken)
 })
 
-route.post("/point", async(req,res) => {
-    const {DB_STRING, DB_TYPE} = req.db
+route.post("/point", (req,res) => {
+    const {DB_STRING, DB_TYPE, DB_NAME} = req.db
 
     if (!DB_TYPE) throw "one error occurred while try to connect database."
 
@@ -34,18 +34,17 @@ route.post("/point", async(req,res) => {
             date: date ? date : null
         }
         
-        MongoClient.connect(DB_STRING, (err, db) => {
+        MongoClient.connect(DB_STRING, async(err, db) => {
             if (err) throw err
+            const DATABASE = db.db(DB_NAME).collection(process.env.DB_COLLECTION  ? process.env.DB_COLLECTION : "pathokun")
+            const validate = await DATABASE.findOne({url: url})
 
-            const DATABASE = db.db("developing")
-            DATABASE.collection("pathokun").insertOne(data, (err,res) => {
-                if(err) throw err
-                console.log(res)
-            })
-            console.log("Connected to \x1b[42m MongoDB \x1b[0m");
-          });
-      } 
-
+            validate ? () => DATABASE.updateOne({url: url}, data) : DATABASE.insertOne(data, (err, _) => { if(err) throw err }) 
+        })
+        
+        res.status(200).send()
+        return
+    }
 
     // if (!db.endpoint) {
     //     db.endpoint = []

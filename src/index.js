@@ -22,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", (req ,_ ,next) => {
   req.db = {
+    DB_NAME: process.env.DB_NAME,
     DB_TYPE: process.env.DB,
     DB_STRING: process.env.DB_STRING
   }
