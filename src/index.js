@@ -29,7 +29,7 @@ app.use("/api", (req ,_ ,next) => {
   next()
 }, require('@routes/api').default)
 
-app.get("/", async(req, res) => {
+app.get("/", async(_, res) => {
   const parsedFile = await fs.readJSON(path.join(__dirname, "..", "master", ".", "db", "db.json"))
   res.render("index.ejs", { data: parsedFile })
   res.status(200).end();

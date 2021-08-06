@@ -3,12 +3,10 @@ import fs from "fs-extra"
 import path from "path"
 import jwt from "jsonwebtoken"
 import { MongoClient } from "mongodb";
-import { fetchAuthorize } from "@middlewares/authorize"
 
-const db = fs.readJsonSync(path.join(__dirname, '../../master/db/db.json'))
 const route = Router()
 
-route.get("/getprivtoken", (req, res) => {
+route.get("/getprivtoken", (_, res) => {
     const signedToken = jwt.sign({ permissions: ["read"] }, process.env.SECRET_KEY)
     res.status(200).json({token: signedToken})
     console.log(signedToken)
@@ -39,35 +37,12 @@ route.post("/point", (req,res) => {
             const DATABASE = db.db(DB_NAME).collection(process.env.DB_COLLECTION  ? process.env.DB_COLLECTION : "pathokun")
             const validate = await DATABASE.findOne({url: url})
 
-            validate ? () => DATABASE.updateOne({url: url}, data) : DATABASE.insertOne(data, (err, _) => { if(err) throw err }) 
+            validate ? () => DATABASE.updateOne({url: url}, data) : DATABASE.insertOne(data) 
         })
         
         res.status(200).send()
         return
     }
-
-    // if (!db.endpoint) {
-    //     db.endpoint = []
-    //     fs.writeJSON(path.join("master", ".", "db", "db.json"), db)
-    //     return
-    // }
-
-    // const dbValiate = await db.endpoint.find(x => x.url === url)
-
-    // if(dbValiate) {
-    //     res.status(400).send({message: "This url is already created!"})
-    //     return
-    // }
-
-    // await db.endpoint.push({
-    //     url: url,
-    //     description: description,
-    //     content: content,
-    //     date: date
-    // })
-
-    // fs.writeJSON(path.join("master", ".", "db", "db.json"), db)
-    // return res.status(200).send()
 })
 
 route.delete("/point", async(req,res) => {
@@ -83,7 +58,7 @@ route.delete("/point", async(req,res) => {
     res.status(200).send()
 })
 
-route.get("/fetch/:point", fetchAuthorize, (req,res) => {
+route.get("/fetch/:point", (req,res) => {
     const index = db.endpoint.findIndex(x => x.url === req.params.point)
 
     if(!index == null){
