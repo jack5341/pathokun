@@ -30,7 +30,7 @@ export function checkEnv() {
         if (err) {
           throw err
         }
-        console.log("Connected to MongoDB");
+        console.log("Connected to \x1b[42m MongoDB \x1b[0m");
       });
       break;
 

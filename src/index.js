@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 // db
-import * as utils from "./utils/index.js"
+import * as utils from "@utils/index.js"
 utils.checkEnv();
 
 // server
@@ -20,9 +20,15 @@ app.set("views", path.join(__dirname, "/views"))
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api", require('@routes/api').default)
+app.use("/api", (req ,_ ,next) => {
+  req.db = {
+    DB_TYPE: process.env.DB,
+    DB_STRING: process.env.DB_STRING
+  }
+  next()
+}, require('@routes/api').default)
 
-app.get("/", async(_, res) => {
+app.get("/", async(req, res) => {
   const parsedFile = await fs.readJSON(path.join(__dirname, "..", "master", ".", "db", "db.json"))
   res.render("index.ejs", { data: parsedFile })
   res.status(200).end();
