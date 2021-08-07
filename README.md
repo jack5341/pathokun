@@ -110,5 +110,3 @@ Give a ⭐️ if this project helped you! or buy me a 🍺
 
 ## License
 [MIT](https://choosealicense.com/licenses/MIT/)
-  
-.
