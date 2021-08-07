@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { response, Router } from "express";
 import jwt from "jsonwebtoken";
 
 const route = Router();
@@ -56,6 +56,14 @@ route.get("/fetch/:point", async(req, res) => {
     if (!result) {
         res.status(400).send("Bad Request");
         return;
+    }
+
+    if(!result.isprivate) {
+        req.auth ? () => {
+            res.status(200).send({
+                data: result,   
+            }) 
+        } : res.status(401).send()
     }
 
     res.status(200).send({
