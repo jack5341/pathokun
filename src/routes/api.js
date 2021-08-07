@@ -21,7 +21,7 @@ route.post("/point", async (req, res) => {
         url: url,
         description: description ? description : null,
         content: content,
-        isprivate: isprivate === "on" ? true : false,
+        isprivate: isprivate,
         date: date ? date : null,
     };
 
