@@ -110,3 +110,9 @@ Give a ⭐️ if this project helped you! or buy me a 🍺
 
 ## License
 [MIT](https://choosealicense.com/licenses/MIT/)
+
+## Sponsors
+
+<span>
+  <img height="50" width="50" src="https://user-images.githubusercontent.com/53150440/127370994-a21bc410-0d2a-49a4-9001-05bd45d9760b.png"/> 
+</span>
