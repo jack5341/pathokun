@@ -1,16 +1,12 @@
-import fs from "fs-extra";
-import path from "path";
+import { MongoClient } from "mongodb";
 
-export function createDatabase() {
-  console.log("Creating the database...")
+export function connectDB() {
+  const { DB_STRING, SECRET_KEY } = process.env;
 
-  const BASE_DIR = path.join(__dirname, "../../master/db")
-  const FILE_PATH = path.join(BASE_DIR, "db.json")
-
-  if (!fs.existsSync(FILE_PATH)) {
-    fs.mkdirpSync(BASE_DIR)
-    fs.writeFileSync(FILE_PATH, '{"endpoint":[]}')
+  if (!DB_STRING && !SECRET_KEY) {
+    throw "Missing environment variables";
   }
 
-  console.log("Created the database...")
+  const connect = MongoClient.connect(DB_STRING, {useNewUrlParser: true, useUnifiedTopology: true })
+  return connect
 }

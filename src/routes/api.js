@@ -1,74 +1,65 @@
-import { Router } from "express"
-import fs from "fs-extra"
-import path from "path"
-import jwt from "jsonwebtoken"
-import { fetchAuthorize } from "@middlewares/authorize"
+import { Router } from "express";
+import jwt from "jsonwebtoken";
 
-const db = fs.readJsonSync(path.join(__dirname, '../../master/db/db.json'))
-const route = Router()
+const route = Router();
 
-route.get("/getprivtoken", (req, res) => {
-    const signedToken = jwt.sign({ permissions: ["read"] }, process.env.SECRET_KEY)
-    res.status(200).json({token: signedToken})
-    console.log(signedToken)
-})
+route.get("/getprivtoken", (_, res) => {
+    const signedToken = jwt.sign({ permissions: ["read"] }, process.env.SECRET_KEY);
+    res.status(200).json({ token: signedToken });
+});
 
-route.post("/point", async(req,res) => {
-    const { url, description, content, date } = req.body
+route.post("/point", async (req, res) => {
+    const DATABASE = req.db;
+    const { url, description, content, date } = req.body;
 
-    if(!url || !content) {
-        res.status(400).send()
-        return
+    if (!url || !content) {
+        res.status(400).send();
+        return;
     }
 
-    if (!db.endpoint) {
-        db.endpoint = []
-        fs.writeJSON(path.join("master", ".", "db", "db.json"), db)
-        return
-    }
-
-    const dbValiate = await db.endpoint.find(x => x.url === url)
-
-    if(dbValiate) {
-        res.status(400).send({message: "This url is already created!"})
-        return
-    }
-
-    await db.endpoint.push({
+    const data = {
         url: url,
-        description: description,
+        description: description ? description : null,
         content: content,
-        date: date
-    })
+        date: date ? date : null,
+    };
 
-    fs.writeJSON(path.join("master", ".", "db", "db.json"), db)
-    return res.status(200).send()
-})
+    const db = DATABASE.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION ? process.env.DB_COLLECTION : "pathokun");
+    const validate = await db.findOne({ url: url });
 
-route.delete("/point", async(req,res) => {
-    const { index } = req.query
+    validate ? () => db.updateOne({ url: url }, data) : db.insertOne(data);
+    res.status(200).send();
+    return;
+});
 
-    if(!index) {
-        res.status(400).send("Bad Request")
-        return
+route.delete("/point", async (req, res) => {
+    const { url } = req.query;
+    const DATABASE = req.db;
+
+    if (!url) {
+        res.status(400).send("Bad Request");
+        return;
     }
 
-    db.endpoint.splice(index, 1)
-    await fs.writeJSON(path.join("master", ".", "db", "db.json"), db)
-    res.status(200).send()
-})
+    const db = DATABASE.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION ? process.env.DB_COLLECTION : "pathokun");
+    await db.deleteOne({ url: url });
 
-route.get("/fetch/:point", fetchAuthorize, (req,res) => {
-    const index = db.endpoint.findIndex(x => x.url === req.params.point)
+    res.status(200).send();
+});
 
-    if(!index == null){
-        res.status(400).send("Bad Request")
-        return
+route.get("/fetch/:point", async(req, res) => {
+    const DATABASE = req.db;
+    const db = DATABASE.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION ? process.env.DB_COLLECTION : "pathokun");
+    const result = await db.findOne({ url: req.params.point });
+
+    if (!result) {
+        res.status(400).send("Bad Request");
+        return;
     }
 
     res.status(200).send({
-        data: db.endpoint[index]
-    })    
-})
+        data: result,
+    });
+});
 
-export default route
+export default route;
