@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { response, Router } from "express";
 import jwt from "jsonwebtoken";
 
 const route = Router();
@@ -10,7 +10,7 @@ route.get("/getprivtoken", (_, res) => {
 
 route.post("/point", async (req, res) => {
     const DATABASE = req.db;
-    const { url, description, content, date } = req.body;
+    const { url, description, content, date, isprivate } = req.body;
 
     if (!url || !content) {
         res.status(400).send();
@@ -21,6 +21,7 @@ route.post("/point", async (req, res) => {
         url: url,
         description: description ? description : null,
         content: content,
+        isprivate: isprivate,
         date: date ? date : null,
     };
 
@@ -55,6 +56,18 @@ route.get("/fetch/:point", async(req, res) => {
     if (!result) {
         res.status(400).send("Bad Request");
         return;
+    }
+
+    if(result.isprivate) {
+        req.auth ? () => {
+            res.status(200).send({
+                data: result,   
+            })
+            return 
+        } : () => {
+            res.status(401).send()
+            return
+        }
     }
 
     res.status(200).send({
