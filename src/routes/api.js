@@ -1,74 +1,64 @@
-import { Router } from "express"
-import fs from "fs-extra"
-import path from "path"
-import jwt from "jsonwebtoken"
-import { MongoClient } from "mongodb";
+import { Router } from "express";
+import fs from "fs-extra";
+import path from "path";
+import jwt from "jsonwebtoken";
 
-const route = Router()
+const route = Router();
 
 route.get("/getprivtoken", (_, res) => {
-    const signedToken = jwt.sign({ permissions: ["read"] }, process.env.SECRET_KEY)
-    res.status(200).json({token: signedToken})
-    console.log(signedToken)
-})
+    const signedToken = jwt.sign({ permissions: ["read"] }, process.env.SECRET_KEY);
+    res.status(200).json({ token: signedToken });
+    console.log(signedToken);
+});
 
-route.post("/point", (req,res) => {
-    const {DB_STRING, DB_TYPE, DB_NAME} = req.db
+route.post("/point", async(req, res) => {
+    const DATABASE = req.db;
+    const { url, description, content, date } = req.body;
 
-    if (!DB_TYPE) throw "one error occurred while try to connect database."
-
-    const { url, description, content, date } = req.body
-
-    if(!url || !content) {
-        res.status(400).send()
-        return
+    if (!url || !content) {
+        res.status(400).send();
+        return;
     }
 
-    if(DB_TYPE === "MONGODB") {
-        const data = {
-            url: url,
-            description: description ? description : null,
-            content: content,
-            date: date ? date : null
-        }
-        
-        MongoClient.connect(DB_STRING, async(err, db) => {
-            if (err) throw err
-            const DATABASE = db.db(DB_NAME).collection(process.env.DB_COLLECTION  ? process.env.DB_COLLECTION : "pathokun")
-            const validate = await DATABASE.findOne({url: url})
+    const data = {
+        url: url,
+        description: description ? description : null,
+        content: content,
+        date: date ? date : null,
+    };
 
-            validate ? () => DATABASE.updateOne({url: url}, data) : DATABASE.insertOne(data) 
-        })
-        
-        res.status(200).send()
-        return
-    }
-})
+    const db = DATABASE.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION ? process.env.DB_COLLECTION : "pathokun");
+    const validate = await db.findOne({ url: url });
 
-route.delete("/point", async(req,res) => {
-    const { index } = req.query
+    validate ? () => db.updateOne({ url: url }, data) : db.insertOne(data);
+    res.status(200).send();
+    return;
+});
 
-    if(!index) {
-        res.status(400).send("Bad Request")
-        return
+route.delete("/point", async (req, res) => {
+    const { index } = req.query;
+
+    if (!index) {
+        res.status(400).send("Bad Request");
+        return;
     }
 
-    db.endpoint.splice(index, 1)
-    await fs.writeJSON(path.join("master", ".", "db", "db.json"), db)
-    res.status(200).send()
-})
+    db.endpoint.splice(index, 1);
+    await fs.writeJSON(path.join("master", ".", "db", "db.json"), db);
+    res.status(200).send();
+});
 
-route.get("/fetch/:point", (req,res) => {
-    const index = db.endpoint.findIndex(x => x.url === req.params.point)
+route.get("/fetch/:point", (req, res) => {
+    const index = db.endpoint.findIndex((x) => x.url === req.params.point);
 
-    if(!index == null){
-        res.status(400).send("Bad Request")
-        return
+    if (!index == null) {
+        res.status(400).send("Bad Request");
+        return;
     }
 
     res.status(200).send({
-        data: db.endpoint[index]
-    })    
-})
+        data: db.endpoint[index],
+    });
+});
 
-export default route
+export default route;
