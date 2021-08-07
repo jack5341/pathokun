@@ -10,7 +10,7 @@ route.get("/getprivtoken", (_, res) => {
 
 route.post("/point", async (req, res) => {
     const DATABASE = req.db;
-    const { url, description, content, date } = req.body;
+    const { url, description, content, date, isprivate } = req.body;
 
     if (!url || !content) {
         res.status(400).send();
@@ -21,6 +21,7 @@ route.post("/point", async (req, res) => {
         url: url,
         description: description ? description : null,
         content: content,
+        isprivate: isprivate === "on" ? true : false,
         date: date ? date : null,
     };
 

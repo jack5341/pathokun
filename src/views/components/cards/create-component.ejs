@@ -12,6 +12,10 @@
         id="endpoint-url"
       />
     </div>
+    <div class="form-switch mb-3">
+      <input class="form-check-input" id="isprivate" type="checkbox" id="flexSwitchCheckChecked">
+      <label class="form-check-label" for="flexSwitchCheckChecked">Private Access 🔒</label>
+    </div>    
     <div class="mb-3">
       <label for="description" class="form-label">Description:</label>
       <input
@@ -48,7 +52,7 @@
     const url = document.getElementById("endpoint-url").value;
     const description = document.getElementById("description").value;
     const content = document.getElementById("content").value;
-
+    const isprivate = document.getElementById("isprivate").checked;
     if (url === "" || description === "" || content === "") {
       alert("Please fill all the fields.");
       return;
@@ -63,6 +67,7 @@
         url: url,
         description: description,
         content: content,
+        isprivate: isprivate,
         date: new Date().toISOString(),
       }),
     }).then((res) => {
