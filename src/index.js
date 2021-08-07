@@ -26,8 +26,7 @@ app.use("/api", async(req ,_ ,next) => {
 app.get("/", async(_, res) => {
   const DATABASE = await connectDB()
   const db = DATABASE.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION ? process.env.DB_COLLECTION : "pathokun")
-  const elements = await db.find({}).toArray()
-  
+  const elements = await db.find({}).toArray()  
   res.render("index.ejs", { data: elements })
   res.status(200).end();
 });

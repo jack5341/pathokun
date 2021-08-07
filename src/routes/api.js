@@ -36,15 +36,17 @@ route.post("/point", async(req, res) => {
 });
 
 route.delete("/point", async (req, res) => {
-    const { index } = req.query;
+    const { url } = req.query;
+    const DATABASE = req.db;
 
-    if (!index) {
+    if (!url) {
         res.status(400).send("Bad Request");
         return;
     }
 
-    db.endpoint.splice(index, 1);
-    await fs.writeJSON(path.join("master", ".", "db", "db.json"), db);
+    const db = DATABASE.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION ? process.env.DB_COLLECTION : "pathokun");
+    await db.deleteOne({ url: url });
+
     res.status(200).send();
 });
 
