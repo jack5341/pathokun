@@ -58,12 +58,16 @@ route.get("/fetch/:point", async(req, res) => {
         return;
     }
 
-    if(!result.isprivate) {
+    if(result.isprivate) {
         req.auth ? () => {
             res.status(200).send({
                 data: result,   
-            }) 
-        } : res.status(401).send()
+            })
+            return 
+        } : () => {
+            res.status(401).send()
+            return
+        }
     }
 
     res.status(200).send({
