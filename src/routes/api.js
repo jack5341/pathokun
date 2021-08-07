@@ -1,6 +1,4 @@
 import { Router } from "express";
-import fs from "fs-extra";
-import path from "path";
 import jwt from "jsonwebtoken";
 
 const route = Router();
@@ -8,10 +6,9 @@ const route = Router();
 route.get("/getprivtoken", (_, res) => {
     const signedToken = jwt.sign({ permissions: ["read"] }, process.env.SECRET_KEY);
     res.status(200).json({ token: signedToken });
-    console.log(signedToken);
 });
 
-route.post("/point", async(req, res) => {
+route.post("/point", async (req, res) => {
     const DATABASE = req.db;
     const { url, description, content, date } = req.body;
 
@@ -50,16 +47,18 @@ route.delete("/point", async (req, res) => {
     res.status(200).send();
 });
 
-route.get("/fetch/:point", (req, res) => {
-    const index = db.endpoint.findIndex((x) => x.url === req.params.point);
+route.get("/fetch/:point", async(req, res) => {
+    const DATABASE = req.db;
+    const db = DATABASE.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION ? process.env.DB_COLLECTION : "pathokun");
+    const result = await db.findOne({ url: req.params.point });
 
-    if (!index == null) {
+    if (!result) {
         res.status(400).send("Bad Request");
         return;
     }
 
     res.status(200).send({
-        data: db.endpoint[index],
+        data: result,
     });
 });
 
