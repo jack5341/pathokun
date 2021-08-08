@@ -24,20 +24,12 @@ Firstly you will need to add the following environment variables to your .env fi
 
 According to the Pathokun use purpose, you must first create a endpoint by have in user panel create endpoint form.
 
-#  Since v2.0 there is **WYSIWYG** editor for best experience !
-
-eg:
-
-![image](https://user-images.githubusercontent.com/53150440/126082322-8a00bc71-a272-4055-ba8a-11053f5337d7.png)
-
 ### **Generate Private Token**
 Whenever you want fetch your content by pathname, firstly have to generate an private access token from user panel.
 
 eg:
 
 ![image](https://user-images.githubusercontent.com/53150440/126082355-7882e05a-e131-4e16-a05c-bf6d7167bb7b.png)
-
-#  Since v1.6 you can choose is your content is **private or public !**
 
 ### **Fetch Content from Endpoint**
 So after you have generate a private token you can directly access your content by endpoint.Just you have to put your private token
@@ -64,7 +56,15 @@ eg:
 | :--- | :--------- | :------- | :---
 | `string` | `string` | `string` | `date`
 
+#  Since v2.0 there is **WYSIWYG** editor for best experience !
+![Pathokun WYSIWYG editor](master/img/WYSIWYG.gif)
+
+
+#  Since v1.6 you can choose is your content is **private or public !**
+
 #  Since v1.5 Possible to use with MongoDB
+
+
 
 ## Run Locally
 
