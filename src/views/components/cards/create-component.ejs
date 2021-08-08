@@ -14,7 +14,8 @@
             <label for="description" class="form-label">Description:</label>
             <input type="text" class="form-control" id="description" placeholder="This is description for that endpoint." />
         </div>
-        <div class="mb-3 d-flex">
+        <!-- Will add this feature with new UI by react.js -->
+        <!-- <div class="mb-3 d-flex">
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="texteditor" checked />
                 <label class="form-check-label"> Text Editor </label>
@@ -27,14 +28,15 @@
                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="codeeditor" />
                 <label class="form-check-label" for="codeEditor"> Code Editor </label>
             </div>
-        </div>
+        </div> -->
         <script>
             window.addEventListener("load", (e) => {
                 CKEDITOR.replace("textEditor");
             });
         </script>
         <div class="mb-3">
-            <textarea
+          <label for="content" class="form-label">Content:</label>
+          <textarea
                 required
                 rows="6"
                 class="form-control"
@@ -50,24 +52,19 @@
 
 <script>
     async function createEndpoint(e) {
-        document.getElementById("submit").className = "btn w-100 btn-primary disabled"
         // inputs
         const url = document.getElementById("endpoint-url").value;
         const description = document.getElementById("description").value;
-        const content = document.getElementById("content").value;
+        const content = CKEDITOR.instances.textEditor.getData();
         const isprivate = document.getElementById("isprivate").checked;
-
-        // checkboxes
-        const fileUpload = document.getElementById("fileupload").checked;
-        const textEditor = document.getElementById("texteditor").checked;
-        const codeEditor = document.getElementById("codeeditor").checked;
-
         if (url === "" || description === "" || content === "") {
             alert("Please fill all the fields.");
             return;
         }
 
-        await fetch(`/api/point`, {
+        document.getElementById("submit").className = "btn w-100 btn-primary disabled";
+
+        await fetch('/api/point', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
