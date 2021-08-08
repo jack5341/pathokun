@@ -1,6 +1,8 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 
+import { fetchAuthorize } from "@middlewares/authorize.js"
+
 const route = Router();
 
 route.get("/getprivtoken", (_, res) => {
@@ -48,7 +50,7 @@ route.delete("/point", async (req, res) => {
     res.status(200).send();
 });
 
-route.get("/fetch/:point", async(req, res) => {
+route.get("/fetch/:point", fetchAuthorize, async(req, res) => {
     const DATABASE = req.db;
     const db = DATABASE.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION ? process.env.DB_COLLECTION : "pathokun");
     const result = await db.findOne({ url: req.params.point });
@@ -59,12 +61,14 @@ route.get("/fetch/:point", async(req, res) => {
     }
 
     if(result.isprivate) {
-        req.auth ? () => {
+        const isauthorized = req.auth
+        console.log(isauthorized)
+        if (req.auth) {
             res.status(200).send({
                 data: result,   
             })
             return 
-        } : () => {
+        }else {
             res.status(401).send()
             return
         }
