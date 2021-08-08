@@ -61,6 +61,7 @@ eg:
 
 
 #  Since v1.6 you can choose is your content is **private or public !**
+![Pathokun Public and Private Access](master/img/public-private.gif)
 
 #  Since v1.5 Possible to use with MongoDB
 
