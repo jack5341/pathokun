@@ -56,18 +56,6 @@ eg:
 | :--- | :--------- | :------- | :---
 | `string` | `string` | `string` | `date`
 
-#  Since v2.0 there is **WYSIWYG** editor for best experience !
-![Pathokun WYSIWYG editor](master/img/WYSIWYG.gif)
-
-
-#  Since v1.6 you can choose is your content is **private or public !**
-![Pathokun Public and Private Access](master/img/public-private.gif)
-
-#  Since v1.5 Possible to use with MongoDB
-<img width="1251" alt="Screenshot 2021-08-08 at 20 52 48" src="https://user-images.githubusercontent.com/53150440/128642677-e6eae36b-733c-4efa-947f-3f44919dceb2.png">
-
-
-
 ## Run Locally
 
 Clone the project
