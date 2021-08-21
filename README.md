@@ -8,7 +8,7 @@ Pathokun, a path generator, update your content just with your frontend by HTTP 
 Pathokun removes the taboo that you can't have a Full-Stack project without a backend.
 
 
-## Workprincpe
+## Pattern
 
 ![image](https://user-images.githubusercontent.com/53150440/126083571-31cceb9e-60bc-4efd-8152-4ae24a6d5620.png)
 
