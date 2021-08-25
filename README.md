@@ -42,19 +42,11 @@ eg:
 
 ![Pathokun Fetch Content](master/img/fetch-content.gif)
 
-### **Database Schema**
+### ***Endpoint* Database Schema**
 
-
-| uuid | secret_key | endpoint |
-| :--- | :--------- | :------- |
-| `string` | `string` | `array` |
-
-
-### ***endpoint* Schema**
-
-| url | description | content | date
-| :--- | :--------- | :------- | :---
-| `string` | `string` | `string` | `date`
+id | url | description | content | date
+:--- | :--- | :--------- | :------- | :---
+`int` | `string` | `string` | `string` | `date`
 
 ## Run Locally
 
